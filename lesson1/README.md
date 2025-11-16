@@ -7,8 +7,8 @@
 
 下面是git的初始化設定
 '''base
-git config --global user.name "Agathechiu"
-git config --global user.email "agachiu2002@gmail.com"
+git config --global user.name "XXXXXX"
+git config --global user.email "XXXXX@gmail.com"
 git config --global pull.rebase false
 '''
 
