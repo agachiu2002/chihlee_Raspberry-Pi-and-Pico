@@ -25,11 +25,19 @@ def play_game(): #funtion結構化程式 定義funtion--- NAME():
             print("您已經猜了",count,"次\n")
         else:
             print("請輸入提示範圍內的數字") 
+def main():
+    # n = 0 << 就會變成區域變數 只有main可以用
+    while(True):
+        play_game()
+        play_again = input("要再挑戰一次?(y,n)")
+        if play_again =="n":
+                    break
+            
+    print("GAME Over")
 
-while(True):
-    play_game()
-    play_again = input("要再挑戰一次?(y,n)")
-    if play_again =="n":
-        break
-    
-print("GAME Over")
+if __name__ == "__main__":
+    n = 0  #全域變數 因為在funtion外
+    #print(_name_) #python自定義變數，誰執行我 他就會是誰> print(_name_)>> 改寫到n =0之上
+    main() #如果看到main 程式碼從者裡run funtion name(): <<funtion內，定義區域變數
+
+
