@@ -1,12 +1,13 @@
 import wifi_connect as wifi
 import time
+import ujson
 from umqtt.simple import MQTTClient
 
 # MQTT 設定
 MQTT_BROKER = "10.188.131.25"  # 公開測試用 Broker
 MQTT_PORT = 1883
 CLIENT_ID = "pico_w_publisher"
-TOPIC = "pico/test"
+TOPIC = "living_room/Sensor"
 KEEPALIVE = 60  # 保持連線時間（秒）
 
 # 嘗試連線 WiFi
@@ -32,7 +33,14 @@ counter = 0
 while True:
     try:
         counter += 1
-        message = f"Hello from Pico W! #{counter}"
+        
+        # 建立 JSON 格式的訊息
+        sensor_data = {
+            "temperature": 25.5,
+            "humidity": 60.0,
+            "light_status": "開"
+        }
+        message = ujson.dumps(sensor_data)
         
         print("-" * 30)
         client.publish(TOPIC, message)
