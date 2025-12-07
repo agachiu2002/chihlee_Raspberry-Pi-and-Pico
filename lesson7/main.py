@@ -6,7 +6,7 @@ from umqtt.simple import MQTTClient
 MQTT_BROKER = "10.188.131.25"  # 公開測試用 Broker
 MQTT_PORT = 1883
 CLIENT_ID = "pico_w_publisher"
-TOPIC = "pico/#"
+TOPIC = "pico/test"
 KEEPALIVE = 60  # 保持連線時間（秒）
 
 # 嘗試連線 WiFi
