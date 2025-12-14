@@ -1,5 +1,5 @@
 from machine import Pin
-import time
+from time import sleep
 
 # 這是您設定的引腳號碼，例如 ESP32/ESP8266 的 GPIO 15
 led_pin = 15
@@ -8,10 +8,13 @@ led_pin = 15
 # led = Pin(led_pin, Pin.OUT)
 led = Pin(led_pin, Pin.OUT) # 設置引腳 15 為輸出模式
 
-led.value(1) # 使用 .value() 設定為高電位 (ON)
+while(True):
+    led.toggle()
+    sleep(2)
+#led.value(1) # 使用 .value() 設定為高電位 (ON)
 # 或者使用 led.on() 也可以，但 .value() 是更通用的方法
 
-print("LED 已經開啟")
+#print("LED 已經開啟")
 
 # 可以加入一個小迴圈讓它閃爍
 # try:
