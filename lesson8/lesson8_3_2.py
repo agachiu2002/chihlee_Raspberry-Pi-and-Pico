@@ -1,41 +1,37 @@
 from machine import Pin
-from time import sleep_ms
+import time
 
-# --- 參數設定 (綠色改 GP21) ---
-BUTTON_PIN = 15
-RED_LED = 14
-GREEN_LED = 21   # ← 綠色LED 正極接 GP21
-
-# 初始化
+# 紅色組 (按鍵 GP19 控制 LED GP20)
+RED_BUTTON = 19
+RED_LED = 20
 red_led = Pin(RED_LED, Pin.OUT)
-green_led = Pin(GREEN_LED, Pin.OUT)
-button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+red_button = Pin(RED_BUTTON, Pin.IN, Pin.PULL_DOWN)
+red_state = False
+red_last = False
 
-led_mode = 0  # 0=全滅, 1=紅亮, 2=綠亮
-last_button_state = 0  # PULL_DOWN，預設為低電位
+# 綠色組 (按鍵 GP17 控制 LED GP19)
+GREEN_BUTTON = 17
+GREEN_LED = 19
+green_led = Pin(GREEN_LED, Pin.OUT)
+green_button = Pin(GREEN_BUTTON, Pin.IN, Pin.PULL_DOWN)
+green_state = False
+green_last = False
 
 while True:
-    current_button = button.value()
+    # 紅色按鍵控制
+    red_current = red_button.value()
+    if red_current and not red_last:
+        red_state = not red_state
+        red_led.value(red_state)
+        time.sleep(0.3)
+    red_last = red_current
     
-    # 偵測按鈕從「放開」變成「按下」的瞬間 (上升邊緣)
-    if last_button_state == 0 and current_button == 1:
-        # 防彈跳延遲
-        sleep_ms(50)
-        
-        # 再次確認按鈕確實被按下
-        if button.value() == 1:
-            led_mode = (led_mode + 1) % 3
-            
-            red_led.off()
-            green_led.off()
-            
-            if led_mode == 1:
-                red_led.on()
-            elif led_mode == 2:
-                green_led.on()
+    # 綠色按鍵控制
+    green_current = green_button.value()
+    if green_current and not green_last:
+        green_state = not green_state
+        green_led.value(green_state)
+        time.sleep(0.3)
+    green_last = green_current
     
-    # 更新按鈕狀態
-    last_button_state = current_button
-    
-    # 小延遲減少 CPU 使用
-    sleep_ms(10)
+    time.sleep(0.01)
