@@ -1,8 +1,8 @@
 from machine import Pin
 from time import sleep_ms
 
-btn_pin = 19
-led_pin = 20
+btn_pin = 14
+led_pin = 15
 
 button = Pin(btn_pin, Pin.IN, Pin.PULL_UP)
 led = Pin(led_pin, Pin.OUT)
@@ -30,4 +30,4 @@ while True:
     last_button_state = current_button_state
     
     # 小延遲減少 CPU 使用
-    sleep_ms(10) 
+    sleep_ms(10)
