@@ -119,7 +119,7 @@ Raspberry Pi Pico
 from machine import ADC, Pin
 from time import sleep
 
-# 初始化 ADC（使用 GPIO 26）
+# 初始化 ADC（使用 GPIO 26）##改成28!!!
 potentiometer = ADC(Pin(26))
 
 while True:
